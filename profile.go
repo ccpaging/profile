@@ -5,14 +5,14 @@ import (
 	"github.com/spf13/cast"
 )
 
-var ProfileDelimiter = config.DELIMITER
+var DELIMITER = config.DELIMITER
 
 type Profile struct {
 	*config.Config
 	section string
 }
 
-func NewProfile(dsn string, section string) (*Profile, error) {
+func New(dsn string, section string) (*Profile, error) {
 	return &Profile{
 		section: section,
 		Config:  config.New(dsn),

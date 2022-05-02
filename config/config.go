@@ -69,16 +69,3 @@ func (c *Config) Flatten() map[string]interface{} {
 
 	return cloneMap(c.flat)
 }
-
-// Clone a new config
-func (c *Config) Clone() *Config {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-
-	return &Config{
-		data: cloneMap(c.data),
-		flat: flattenMap(c.data, ""),
-		env:  cloneMap(c.env),
-		arg:  cloneMap(c.arg),
-	}
-}

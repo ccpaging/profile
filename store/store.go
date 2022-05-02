@@ -2,10 +2,10 @@ package store
 
 type Store interface {
 	// load retrieves the configuration stored.
-	LoadStore() (map[string]interface{}, error)
+	Load() (map[string]interface{}, error)
 
 	// save replaces the current configuration in its entirety.
-	SaveStore(map[string]interface{}) error
+	Save(map[string]interface{}) error
 
 	// Existed returns true if the file was persisted.
 	Existed() (bool, error)

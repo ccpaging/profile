@@ -13,7 +13,7 @@ type Config struct {
 	env  map[string]interface{}
 	arg  map[string]interface{}
 
-	Store store.Store
+	file store.Store
 }
 
 // New return a configure store with map stored and file stored.
@@ -21,11 +21,11 @@ type Config struct {
 // JSON and TOML are supported now. Otherwise, return error.
 func New(dsn string) *Config {
 	c := &Config{
-		data:  make(map[string]interface{}),
-		flat:  make(map[string]interface{}),
-		env:   make(map[string]interface{}),
-		arg:   make(map[string]interface{}),
-		Store: store.NewStore(dsn),
+		data: make(map[string]interface{}),
+		flat: make(map[string]interface{}),
+		env:  make(map[string]interface{}),
+		arg:  make(map[string]interface{}),
+		file: store.NewStore(dsn),
 	}
 	return c
 }
@@ -37,7 +37,7 @@ func (c *Config) Load() (map[string]interface{}, error) {
 
 	out := cloneMap(c.data)
 
-	data, err := c.Store.LoadStore()
+	data, err := c.file.Load()
 	if err != nil {
 		return out, err
 	}
@@ -51,7 +51,7 @@ func (c *Config) Save() error {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
-	return c.Store.SaveStore(c.data)
+	return c.file.Save(c.data)
 }
 
 // Data returns the clone of config data.

@@ -19,7 +19,7 @@ func newTOMLFile(path string) *tomlFile {
 }
 
 // load config file to config data only
-func (f *tomlFile) LoadStore() (map[string]interface{}, error) {
+func (f *tomlFile) Load() (map[string]interface{}, error) {
 	content, err := ioutil.ReadFile(f.path)
 	if err != nil {
 		return nil, err
@@ -34,7 +34,7 @@ func (f *tomlFile) LoadStore() (map[string]interface{}, error) {
 }
 
 // save config data to file only
-func (f *tomlFile) SaveStore(in map[string]interface{}) error {
+func (f *tomlFile) Save(in map[string]interface{}) error {
 	if in == nil {
 		return errors.New("Config is nil")
 	}

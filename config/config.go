@@ -20,14 +20,13 @@ type Config struct {
 // And it detects file format by file name extension.
 // JSON and TOML are supported now. Otherwise, return error.
 func New(dsn string) *Config {
-	c := &Config{
+	return &Config{
 		data: make(map[string]interface{}),
 		flat: make(map[string]interface{}),
 		env:  make(map[string]interface{}),
 		arg:  make(map[string]interface{}),
 		file: store.NewStore(dsn),
 	}
-	return c
 }
 
 // Load config data from file. Returns old data and error.

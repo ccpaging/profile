@@ -16,9 +16,7 @@ type Config struct {
 	file store.Store
 }
 
-// New return a configure store with map stored and file stored.
-// And it detects file format by file name extension.
-// JSON and TOML are supported now. Otherwise, return error.
+// New return a configure store but not loaded.
 func New(dsn string) *Config {
 	return &Config{
 		data: make(map[string]interface{}),
@@ -29,7 +27,9 @@ func New(dsn string) *Config {
 	}
 }
 
-// Load config data from file. Returns old data and error.
+// Load config data from file. 
+// And it detects file format by file name extension. 
+// JSON and TOML are supported now. Returns old map and error.
 func (c *Config) Load() (map[string]interface{}, error) {
 	c.mu.Lock()
 	defer c.mu.Unlock()

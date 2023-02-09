@@ -48,6 +48,10 @@ func (pf *Profile) WriteValue(key string, v any) {
 	pf.Config.WriteValue(pf.section, key, v)
 }
 
+func (pf *Profile) HasKey(key string) (interface{}, bool) {
+	return pf.Config.HasKey(pf.section, key)
+}
+
 func (pf *Profile) GetString(key string, sDefault string) string {
 	v := pf.Config.GetValue(pf.section, key, sDefault)
 	return cast.ToString(v)
